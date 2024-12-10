@@ -2,7 +2,7 @@ name: Deploy SQL Schema
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
