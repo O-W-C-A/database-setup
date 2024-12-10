@@ -1,3 +1,4 @@
+[![Deploy SQL Schema](https://github.com/O-W-C-A/database-setup/actions/workflows/deploy-database.yml/badge.svg)](https://github.com/O-W-C-A/database-setup/actions/workflows/deploy-database.yml)
 # SQL Server Database Deployment with DACPAC
 
 This repository contains the database schema for the [Project Name] SQL Server database. The schema is stored as a `.dacpac` file, which is used to automate deployments to an Azure SQL Database using GitHub Actions.
