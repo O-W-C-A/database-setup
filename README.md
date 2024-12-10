@@ -6,7 +6,7 @@ This repository contains the database schema for the [Project Name] SQL Server d
 
 ```
 .
-├── Database.dacpac         # Compiled database schema
+├── ExamsDB.dacpac         # Compiled database schema
 ├── Schema
 │   └── DatabaseSchema.sql
 ├── .github
@@ -68,7 +68,7 @@ jobs:
     - name: Deploy Schema using SQLPackage
       run: |
         sqlpackage /Action:Publish \
-                   /SourceFile:Database.dacpac \
+                   /SourceFile:ExamsDB.dacpac \
                    /TargetServerName:${{ secrets.AZURE_SQL_SERVER }} \
                    /TargetDatabaseName:${{ secrets.AZURE_SQL_DB_NAME }} \
                    /TargetUser:${{ secrets.AZURE_SQL_USER }} \
