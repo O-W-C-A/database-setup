@@ -1,0 +1,22 @@
+name: Deploy SQL Schema
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Deploy Schema using SQLPackage
+      run: |
+        sqlpackage /Action:Publish \
+                   /SourceFile:Database.dacpac \
+                   /TargetServerName:${{ secrets.AZURE_SQL_SERVER }} \
+                   /TargetDatabaseName:${{ secrets.AZURE_SQL_DB_NAME }} \
+                   /TargetUser:${{ secrets.AZURE_SQL_USER }} \
+                   /TargetPassword:${{ secrets.AZURE_SQL_PASSWORD }}
