@@ -28,4 +28,5 @@ jobs:
                    /TargetServerName:$AZURE_SQL_SERVER \
                    /TargetDatabaseName:$AZURE_SQL_DB_NAME \
                    /TargetUser:$AZURE_SQL_USER \
-                   /TargetPassword:$AZURE_SQL_PASSWORD
+                   /TargetPassword:$AZURE_SQL_PASSWORD \
+                   /TargetVersion:v12
