@@ -1,31 +1,29 @@
-name: Deploy SQL Schema
+name: Deploy Database
+
 on:
   push:
     branches:
       - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
-    - name: Set Environment Variables
-      env:
-        AZURE_SQL_SERVER: ${{ secrets.AZURE_SQL_SERVER }}
-        AZURE_SQL_DB_NAME: ${{ secrets.AZURE_SQL_DB_NAME }}
-        AZURE_SQL_USER: ${{ secrets.AZURE_SQL_USER }}
-        AZURE_SQL_PASSWORD: ${{ secrets.AZURE_SQL_PASSWORD }}
-      run: |
-        echo "Environment variables set."
+    - name: Setup Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy Schema using SQLPackage
+    - name: Deploy DACPAC
       run: |
-        sqlpackage /Action:Publish \
-                   /SourceFile:ExamsDB.dacpac \
-                   /TargetServerName:$AZURE_SQL_SERVER \
-                   /TargetDatabaseName:$AZURE_SQL_DB_NAME \
-                   /TargetUser:$AZURE_SQL_USER \
-                   /TargetPassword:$AZURE_SQL_PASSWORD
+        az sql server dacpac deploy \
+          --source ExamsDB.dacpac \
+          --server ${{ secrets.SQL_SERVER_NAME }} \
+          --resource-group ${{ secrets.RESOURCE_GROUP }} \
+          --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }} \
+          --database-name ExamsDB \
+          --edition Standard \
+          --edition Standard
