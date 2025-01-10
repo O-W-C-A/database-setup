@@ -1,80 +1,6 @@
-[![Deploy SQL Schema](https://github.com/O-W-C-A/database-setup/actions/workflows/deploy-database.yml/badge.svg)](https://github.com/O-W-C-A/database-setup/actions/workflows/deploy-database.yml)
-# SQL Server Database Deployment with DACPAC
+# SQL Server Database Data
 
-This repository contains the database schema for the [Project Name] SQL Server database. The schema is stored as a `.dacpac` file, which is used to automate deployments to an Azure SQL Database using GitHub Actions.
-
-## Repository Structure
-
-```
-.
-├── ExamsDB.dacpac         # Compiled database schema
-├── Schema
-│   └── DatabaseSchema.sql
-├── .github
-│   └── workflows
-│       └── deploy-database.yml  # GitHub Actions workflow file
-├── README.md               # This file
-```
-
-## Deployment Workflow
-
-This repository is set up with a GitHub Actions workflow to deploy the database schema to Azure SQL Database.
-
-### Workflow Trigger
-The deployment workflow (`deploy-database.yml`) is triggered automatically:
-- On every push to the `main` branch.
-- When a pull request is merged into `main`.
-
-## Prerequisites
-
-Before using this repository, ensure the following:
-
-1. **Azure SQL Database**:
-   - A logical SQL Server is set up on Azure.
-   - An empty database is created, or the target database name is known.
-
-2. **Secrets Configuration**:
-   Add the following secrets to your GitHub repository:
-   - `AZURE_SQL_SERVER`: The name of your Azure SQL Server (e.g., `your-server-name.database.windows.net`).
-   - `AZURE_SQL_DB_NAME`: The target database name.
-   - `AZURE_SQL_USER`: The username for the Azure SQL admin.
-   - `AZURE_SQL_PASSWORD`: The password for the Azure SQL admin.
-
-3. **GitHub Actions Runner**:
-   Ensure the repository is enabled for GitHub Actions.
-
-## Setting Up the Workflow
-
-The deployment is defined in the `.github/workflows/deploy-database.yml` file:
-
-```yaml
-name: Deploy SQL Database
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-
-    - name: Deploy Schema using SQLPackage
-      run: |
-        sqlpackage /Action:Publish \
-                   /SourceFile:ExamsDB.dacpac \
-                   /TargetServerName:${{ secrets.AZURE_SQL_SERVER }} \
-                   /TargetDatabaseName:${{ secrets.AZURE_SQL_DB_NAME }} \
-                   /TargetUser:${{ secrets.AZURE_SQL_USER }} \
-                   /TargetPassword:${{ secrets.AZURE_SQL_PASSWORD }}
-```
+This repository contains the database schema for the ExamPlanner SQL Server database.
 
 ## How to Use
 
@@ -94,20 +20,6 @@ jobs:
    git commit -m "Update database schema"
    git push origin main
    ```
-
-4. **Monitor Workflow**:
-   Check the GitHub Actions tab to monitor the deployment process.
-
-## Security Considerations
-
-- Use **GitHub Secrets** to store sensitive credentials.
-- Restrict access to the `main` branch to authorized personnel.
-
-## Features
-
-- Automates deployment of SQL Server database schema to Azure.
-- Integrates with GitHub Actions for continuous delivery.
-- Tracks schema changes using version control.
 
 ## Testing
 
