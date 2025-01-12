@@ -1,4 +1,4 @@
-# SQL Server Database Data
+8# SQL Server Database Data
 
 This repository contains the database schema for the ExamPlanner SQL Server database.
 
@@ -11,7 +11,7 @@ This repository contains the database schema for the ExamPlanner SQL Server data
    ```
 
 2. **Update the DACPAC File**:
-   Replace `Database.dacpac` with your updated database schema file.
+   Replace `ExamsDB.dacpac` with your updated database schema file.
 
 3. **Push Changes to Main**:
    Commit and push changes to trigger the deployment workflow.
