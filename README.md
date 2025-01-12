@@ -6,8 +6,8 @@ This repository contains the database schema for the ExamPlanner SQL Server data
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/o-w-c-a/database-setup.git
+   cd database-setup
    ```
 
 2. **Update the DACPAC File**:
